@@ -3,125 +3,58 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Ada Lovelace | Tribute</title>
-    <meta
-      name="description"
-      content="A tribute page honoring Ada Lovelace, visionary mathematician and writer whose imagination anticipated the modern computer."
-    />
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Inter:wght@400;500;600;700&display=swap"
-      rel="stylesheet"
-    />
+    <title>Daily To-Do List</title>
     <link rel="stylesheet" href="style.css" />
   </head>
   <body>
-    <header class="hero">
-      <nav class="topbar">
-        <span class="brand">Tribute</span>
-      </nav>
-      <div class="hero-content container">
-        <div class="hero-copy">
-          <p class="eyebrow">Pioneer of imaginative computation</p>
-          <h1>Ada Lovelace</h1>
-          <p class="tagline">The visionary whose mind saw beyond numbers into the future of machines.</p>
+    <main class="app-shell">
+      <header class="app-header">
+        <div>
+          <p class="eyebrow">Personal planner</p>
+          <h1>Daily To-Do List</h1>
         </div>
-      </div>
-    </header>
+      </header>
 
-    <main>
-      <section class="intro section-light">
-        <div class="container intro-grid">
-          <div class="image-panel">
-            <img
-              src="https://images.unsplash.com/photo-1516321318423-f06f85e504b3?auto=format&fit=crop&w=1200&q=80"
-              alt="A desk illuminated by ideas, representing creativity and scientific exploration"
-            />
-            <p class="image-credit">Photo via Unsplash</p>
-          </div>
-
-          <div class="bio-copy">
-            <h2>In memory of a mind ahead of her time</h2>
-            <p>
-              Augusta Ada King, Countess of Lovelace, was born in London in 1815, into a world that still
-              believed women had limited roles in mathematics and science. Yet she was not content to be merely
-              a curious observer. From an early age, Ada was drawn to systems, patterns, and possibilities, and
-              she developed an extraordinary talent for translating abstract ideas into vivid, structured thought.
-            </p>
-            <p>
-              Her most lasting contribution came through her work with Charles Babbage on the Analytical Engine, a
-              proposed mechanical general-purpose computer. Ada did not simply document the machine; she imagined
-              what it could become. She described its ability to manipulate symbols, not just numbers, and she
-              argued that such a device could one day create music, images, and other forms of artistic expression.
-            </p>
-            <p>
-              In her famous Notes A, she wrote with extraordinary clarity about the engine's promise, including a
-              step-by-step algorithm for calculating Bernoulli numbers. This work was more than technical detail—it
-              was a declaration that machines could think in ways beyond arithmetic. Her insight was years ahead of
-              the practical computing era, and it is now recognized as the first published algorithm intended for a
-              computer.
-            </p>
-            <p>
-              Ada Lovelace's legacy is not only in the history of technology, but also in the courage to imagine
-              a future where creative intelligence and mathematical reasoning are inseparable. She reminds us that
-              innovation is not just about building machines—it is about having the imagination to see what they
-              might become.
-            </p>
-          </div>
-        </div>
+      <section class="task-form-card" aria-label="Add a task">
+        <form id="task-form" class="task-form">
+          <label class="sr-only" for="task-input">Add a new task</label>
+          <input
+            id="task-input"
+            name="task"
+            type="text"
+            maxlength="200"
+            placeholder="Add a new task..."
+            autocomplete="off"
+          />
+          <button type="submit" class="primary-btn">Add Task</button>
+        </form>
       </section>
 
-      <section class="achievements section-contrast">
-        <div class="container">
-          <h2>Key achievements</h2>
-          <div class="timeline">
-            <article class="timeline-item">
-              <span class="year">1833</span>
-              <div>
-                <h3>Meeting with Babbage</h3>
-                <p>Ada encountered Charles Babbage and became fascinated by his Difference Engine and later the Analytical Engine.</p>
-              </div>
-            </article>
-            <article class="timeline-item">
-              <span class="year">1843</span>
-              <div>
-                <h3>Notes A published</h3>
-                <p>She translated Luigi Menabrea's paper and expanded it with detailed notes, including the visionary algorithm that would later secure her place in computing history.</p>
-              </div>
-            </article>
-            <article class="timeline-item">
-              <span class="year">1843</span>
-              <div>
-                <h3>Vision of machine creativity</h3>
-                <p>She predicted that computers could manipulate symbols, compose music, and generate art—ideas that resonate directly with modern AI and digital creativity.</p>
-              </div>
-            </article>
-            <article class="timeline-item">
-              <span class="year">Legacy</span>
-              <div>
-                <h3>Computing icon</h3>
-                <p>Her work was rediscovered in the 20th century, and she is now celebrated as a foundational figure in computer science and technological imagination.</p>
-              </div>
-            </article>
+      <section class="task-columns">
+        <article class="task-panel" aria-labelledby="pending-heading">
+          <div class="panel-header">
+            <h2 id="pending-heading">Pending Tasks</h2>
+            <span id="pending-count" class="count-pill" aria-live="polite">0 pending</span>
           </div>
-        </div>
-      </section>
+          <ul id="pending-list" class="task-list" aria-live="polite"></ul>
+          <div id="pending-empty" class="empty-state hidden">
+            No pending tasks. Add one to get started.
+          </div>
+        </article>
 
-      <section class="quote-section section-light">
-        <div class="container quote-wrap">
-          <blockquote>
-            “The Analytical Engine weaves algebraic patterns just as the Jacquard loom weaves flowers and leaves.”
-          </blockquote>
-          <p class="quote-credit">— Ada Lovelace</p>
-        </div>
+        <article class="task-panel" aria-labelledby="completed-heading">
+          <div class="panel-header">
+            <h2 id="completed-heading">Completed Tasks</h2>
+            <span id="completed-count" class="count-pill secondary" aria-live="polite">0 completed</span>
+          </div>
+          <ul id="completed-list" class="task-list" aria-live="polite"></ul>
+          <div id="completed-empty" class="empty-state hidden">
+            No completed tasks yet. Finish something great.
+          </div>
+        </article>
       </section>
     </main>
 
-    <footer class="site-footer">
-      <div class="container">
-        <p>Honoring Ada Lovelace, whose creativity and intelligence helped shape the future of computing.</p>
-      </div>
-    </footer>
+    <script src="script.js"></script>
   </body>
 </html>
